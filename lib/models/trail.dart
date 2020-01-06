@@ -1,4 +1,4 @@
-/// Represents some descriptive information about a [Trail].
+/// Represents some descriptive information about a [Trail]..
 import 'package:latlong/latlong.dart';
 import 'fact.dart';
 import 'map_location.dart';

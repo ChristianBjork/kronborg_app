@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kronborg_app/style.dart';
 
-// This widget sets the title and body of the description of an attraction
+// This widget sets the title and body of the description of an attraction.
 class AttrTextSection extends StatelessWidget {
   final String _title;
   final String _body;

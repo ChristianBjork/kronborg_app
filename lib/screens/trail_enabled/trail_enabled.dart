@@ -5,7 +5,6 @@ import 'package:kronborg_app/models/map_location.dart';
 import 'package:kronborg_app/models/trail.dart';
 import 'package:kronborg_app/style.dart';
 import 'package:latlong/latlong.dart';
-
 import 'package:provider/provider.dart';
 
 class TrailEnabled extends StatefulWidget {

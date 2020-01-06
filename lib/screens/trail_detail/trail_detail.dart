@@ -15,9 +15,7 @@ class TrailDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final trail = Trail.fetchByID(_trailID);
-
     return Scaffold(
         appBar: AppBar(
           title: Text(trail.name),

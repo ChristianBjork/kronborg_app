@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kronborg_app/models/attraction.dart';
 import 'package:kronborg_app/style.dart';
-import 'package:kronborg_app/widgets/attraction_tile.dart';
 
 import '../../widgets/image_banner.dart';
 import 'attr_text_section.dart';

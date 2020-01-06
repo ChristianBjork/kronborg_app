@@ -1,4 +1,4 @@
-/// Represents some descriptive information about a [Attraction].
+/// Represents some descriptive information about a [Attraction]..
 import 'package:latlong/latlong.dart';
 import 'fact.dart';
 

@@ -3,6 +3,7 @@ import 'package:kronborg_app/style.dart';
 
 // This widget sets the title and body of the description of a trail
 class TrailTextSection extends StatelessWidget {
+
   final String _title;
   final String _body;
   static const double _hPad = 16.0;
