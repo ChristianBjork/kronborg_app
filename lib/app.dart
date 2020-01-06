@@ -83,7 +83,6 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-
   // This is how dynamic routes are defined
   RouteFactory _routes() {
     return (settings) {

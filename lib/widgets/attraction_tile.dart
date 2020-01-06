@@ -13,7 +13,6 @@ class AttractionTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textColor = this.darkTheme ? TextColorLight : TextColorDark;
-
     return Container(
       padding: EdgeInsets.symmetric(horizontal: DefaultPaddingHorizontal),
       height: AttractionTileHeight,

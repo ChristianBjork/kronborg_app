@@ -32,7 +32,6 @@ const TitleTextStyleLight = TextStyle(
   color: TextColorLight,
 );
 
-
 const TitleTextStyleDark = TextStyle(
   fontFamily: FontNameDefault,
   fontWeight: FontWeight.w300,
