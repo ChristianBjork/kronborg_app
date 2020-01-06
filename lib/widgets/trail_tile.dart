@@ -8,7 +8,7 @@ class TrailTile extends StatelessWidget {
   final Trail trail;
   final bool darkTheme;
 
-  TrailTile({this.trail, this.darkTheme = false});
+  TrailTile({this.trail, this.darkTheme = true});
 
   @override
   Widget build(BuildContext context) {

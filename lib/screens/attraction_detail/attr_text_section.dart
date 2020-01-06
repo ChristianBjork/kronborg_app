@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kronborg_app/style.dart';
 
 // This widget sets the title and body of the description of an attraction
 class AttrTextSection extends StatelessWidget {
@@ -16,7 +17,7 @@ class AttrTextSection extends StatelessWidget {
       children: [
         Container(
             padding: const EdgeInsets.fromLTRB(_hPad, 32.0, _hPad, 4.0),
-            child: Text(_title, style: Theme.of(context).textTheme.title)),
+            child: Text(_title, style: TitleTextStyleLight)),
         Container(
             padding:
             const EdgeInsets.symmetric(vertical: 10.0, horizontal: _hPad),

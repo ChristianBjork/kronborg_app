@@ -22,18 +22,18 @@ const AppBarTextStyle = TextStyle(
   fontFamily: FontNameDefault,
   fontWeight: FontWeight.w300,
   fontSize: LargeTextSize,
-  color: Colors.white,
+  color: TextColorLight,
 );
 
-const FPTitleTextStyle = TextStyle(
+const TitleTextStyleLight = TextStyle(
   fontFamily: FontNameDefault,
   fontWeight: FontWeight.w300,
   fontSize: LargeTextSize,
-  color: Colors.white,
+  color: TextColorLight,
 );
 
 
-const TitleTextStyle = TextStyle(
+const TitleTextStyleDark = TextStyle(
   fontFamily: FontNameDefault,
   fontWeight: FontWeight.w300,
   fontSize: LargeTextSize,
@@ -58,5 +58,5 @@ const Body1TextStyle = TextStyle(
   fontFamily: FontNameDefault,
   fontWeight: FontWeight.w300,
   fontSize: MediumTextSize,
-  color: Colors.black,
+  color: Colors.white,
 );

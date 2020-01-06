@@ -116,9 +116,8 @@ class _MyAppState extends State<MyApp> {
       primaryColor: Color.fromRGBO(128, 85, 0, 1.0),
       appBarTheme: AppBarTheme(textTheme: TextTheme(title: AppBarTextStyle)),
       textTheme: TextTheme(
-        title: TitleTextStyle,
+        title: TitleTextStyleDark,
         subtitle: SubTitleTextStyle,
-        caption: CaptionTextStyle,
         body1: Body1TextStyle,
       ),
     );

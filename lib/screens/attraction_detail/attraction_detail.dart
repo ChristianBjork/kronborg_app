@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kronborg_app/models/attraction.dart';
+import 'package:kronborg_app/style.dart';
 import 'package:kronborg_app/widgets/attraction_tile.dart';
 
 import '../../widgets/image_banner.dart';
@@ -21,17 +22,13 @@ class AttractionDetail extends StatelessWidget {
         appBar: AppBar(
           title: Text(attraction.name),
         ),
+        backgroundColor: BackgroundColor,
         body: SingleChildScrollView(
           child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 ImageBanner(assetPath: attraction.imagePath),
-                Padding(
-                  padding:
-                  EdgeInsets.symmetric(vertical: 20.0, horizontal: 4.0),
-                  child: AttractionTile(attraction: attraction),
-                ),
               ]..addAll(textSections(attraction))),
         ),
     );

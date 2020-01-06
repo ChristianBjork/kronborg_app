@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kronborg_app/models/trail.dart';
+import 'package:kronborg_app/style.dart';
 import 'package:kronborg_app/widgets/image_banner.dart';
 import 'package:kronborg_app/widgets/trail_tile.dart';
 import '../../app.dart';
@@ -21,6 +22,7 @@ class TrailDetail extends StatelessWidget {
         appBar: AppBar(
           title: Text(trail.name),
         ),
+        backgroundColor: BackgroundColor,
         body:
           SingleChildScrollView(
             child: Column(

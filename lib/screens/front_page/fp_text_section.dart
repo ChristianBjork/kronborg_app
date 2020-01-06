@@ -21,7 +21,7 @@ class FPTextSection extends StatelessWidget {
       children: [
         Container(
             padding: const EdgeInsets.fromLTRB(_hPad, 32.0, _hPad, 4.0),
-            child: Text(_title, style: FPTitleTextStyle)),
+            child: Text(_title, style: TitleTextStyleLight)),
         Container(
             padding:
             const EdgeInsets.symmetric(vertical: 10.0, horizontal: _hPad),

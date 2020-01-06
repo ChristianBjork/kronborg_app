@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:kronborg_app/models/attraction.dart';
@@ -38,7 +37,8 @@ class _TrailEnabledState extends State<TrailEnabled> {
             //center: new LatLng(_currentLocation.latitude, _currentLocation.longitude),
             zoom: 18.0),
             layers: [
-              //Get map from mapbox API
+
+              //Get map from MapBox API
               new TileLayerOptions(
                 urlTemplate:
                 'https://api.mapbox.com/styles/v1/bjoerksen/ck3sr2a3k0ah81cochbw0ym39/tiles/256/{z}/{x}/{y}@2x?access_token='
@@ -145,7 +145,7 @@ class _TrailEnabledState extends State<TrailEnabled> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text(title), titleTextStyle: TitleTextStyle,
+            title: Text(title), titleTextStyle: TitleTextStyleDark,
             content: Text('Vil du vide mere on denne attraction?'), contentTextStyle: Body1TextStyle,
             actions: <Widget>[
               FlatButton(
@@ -155,7 +155,7 @@ class _TrailEnabledState extends State<TrailEnabled> {
                   onPressed: () => Navigator.of(context).pop(),
                   child: Text('Ja')),
             ],
-
+            backgroundColor: BackgroundColor,
           );
         });
   }

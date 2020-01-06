@@ -66,7 +66,7 @@ class Trail {
         ]),
       Trail(
           id: 2,
-          name: 'Nær Slottet Rute',
+          name: 'Nær Kronborg',
           lengthKM: 1.41,
           imagePath: 'assets/images/inner_trail.png',
           facts: [

@@ -26,8 +26,7 @@ class AttractionTile extends StatelessWidget {
               key: Key('location_tile_name_${attraction.id}'),
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
-              style:
-              Theme.of(context).textTheme.title.copyWith(color: textColor),
+              style: Theme.of(context).textTheme.title.copyWith(color: textColor),
             ),
           ]),
     );
