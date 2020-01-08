@@ -33,7 +33,7 @@ class Trail {
         id: 1,
         name: 'Kyst Rute',
         lengthKM: 1.96,
-        imagePath: 'assets/images/outer_trail.png',
+        imagePath: 'assets/images/kronborg_kyst.jpeg',
         facts: [
           Fact('Flot og spændende rute venter',
           'På denne rute møder du disse seværdigheder, osv osv osv')
@@ -68,7 +68,7 @@ class Trail {
           id: 2,
           name: 'Nær Kronborg',
           lengthKM: 1.41,
-          imagePath: 'assets/images/inner_trail.png',
+          imagePath: 'assets/images/kronborg_nær.jpeg',
           facts: [
             Fact('Kom tæt på Kronborg',
                 'På denne rute møder du disse seværdigheder, osv osv osv')

@@ -18,6 +18,7 @@ class TrailEnabled extends StatefulWidget {
 
 class _TrailEnabledState extends State<TrailEnabled> {
 
+  double attractionIconSize = 50.0;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -92,8 +93,8 @@ class _TrailEnabledState extends State<TrailEnabled> {
                     builder: (ctx) =>
                     Container(
                       child: GestureDetector(
-                        onTap: () => _popupDialog(context, attractions[1].name),
-                        child: Icon(Icons.location_on, color: Colors.brown),
+                        onTap: () => _showAttraction(context, attractions[1].name,attractions[1].facts[0].text, attractions[1].imagePath),
+                        child: Icon(Icons.location_on, color: Colors.brown, size: attractionIconSize,),
                       ),
                     ),
                   ),
@@ -101,61 +102,157 @@ class _TrailEnabledState extends State<TrailEnabled> {
                     width: 45.00,
                     height: 45.00,
                     point: attractions[2].mapLocation,
-                    builder: (ctx) => Icon(Icons.location_on, color: Colors.brown),
+                    builder: (ctx) =>
+                        Container(
+                          child: GestureDetector(
+                            onTap: () => _showAttraction(context, attractions[2].name, attractions[2].facts[0].text, attractions[2].imagePath),
+                            child: Icon(Icons.location_on, color: Colors.brown, size: attractionIconSize,),
+                          ),
+                        ),
                   ),
                   new Marker(
                     width: 45.00,
                     height: 45.00,
                     point: attractions[3].mapLocation,
-                    builder: (ctx) => Icon(Icons.location_on, color: Colors.brown),
+                    builder: (ctx) =>
+                        Container(
+                          child: GestureDetector(
+                            onTap: () => _showAttraction(context, attractions[3].name, attractions[3].facts[0].text, attractions[3].imagePath),
+                            child: Icon(Icons.location_on, color: Colors.brown, size: attractionIconSize,),
+                          ),
+                        ),
                   ),
                   new Marker(
                     width: 45.00,
                     height: 45.00,
                     point: attractions[4].mapLocation,
-                    builder: (ctx) => Icon(Icons.location_on, color: Colors.brown),
+                    builder: (ctx) =>
+                        Container(
+                          child: GestureDetector(
+                            onTap: () => _showAttraction(context, attractions[4].name, attractions[4].facts[0].text, attractions[4].imagePath),
+                            child: Icon(Icons.location_on, color: Colors.brown, size: attractionIconSize),
+                          ),
+                        ),
                   ),
                   new Marker(
                     width: 45.00,
                     height: 45.00,
                     point: attractions[5].mapLocation,
-                    builder: (ctx) => Icon(Icons.location_on, color: Colors.brown)
+                    builder: (ctx) =>
+                        Container(
+                          child: GestureDetector(
+                            onTap: () => _showAttraction(context, attractions[5].name, attractions[5].facts[0].text, attractions[5].imagePath),
+                            child: Icon(Icons.location_on, color: Colors.brown, size: attractionIconSize),
+                          ),
+                        ),
                   ),
                   new Marker(
                     width: 45.00,
                     height: 45.00,
                     point: attractions[6].mapLocation,
-                    builder: (ctx) => Icon(Icons.location_on, color: Colors.brown),
+                    builder: (ctx) =>
+                        Container(
+                          child: GestureDetector(
+                            onTap: () => _showAttraction(context, attractions[6].name, attractions[6].facts[0].text, attractions[6].imagePath),
+                            child: Icon(Icons.location_on, color: Colors.brown, size: attractionIconSize),
+                          ),
+                        ),
                   ),
                   new Marker(
                     width: 45.00,
                     height: 45.00,
                     point: attractions[7].mapLocation,
-                    builder: (ctx) => Icon(Icons.location_on, color: Colors.brown),
+                    builder: (ctx) =>
+                        Container(
+                          child: GestureDetector(
+                            onTap: () => _showAttraction(context, attractions[7].name, attractions[7].facts[0].text, attractions[7].imagePath),
+                            child: Icon(Icons.location_on, color: Colors.brown, size: attractionIconSize)
+                          ),
+                        ),
                   ),
             ]),
         ],),
     );
   }
 
-  // Alert dialog
-  void _popupDialog(BuildContext context, String title) {
+  void _showAttraction(BuildContext context, String title, String description, String imagePath){
     showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text(title), titleTextStyle: TitleTextStyleDark,
-            content: Text('Vil du vide mere on denne attraction?'), contentTextStyle: Body1TextStyle,
-            actions: <Widget>[
-              FlatButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  child: Text('Nej')),
-              FlatButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  child: Text('Ja')),
-            ],
-            backgroundColor: BackgroundColor,
-          );
-        });
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+          child: Container(
+            height: 600.0,
+            width: 250.0,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20.0)
+            ),
+            child: Column(
+              children: <Widget>[
+                Stack(
+                  children: <Widget>[
+                    Container(
+                      height: 150.0,
+                    ),
+                    Container(
+                      height: 100.0,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10.0),
+                          topRight: Radius.circular(10.0),
+                        ),
+                        color: BackgroundColor
+                      ),
+                    ),
+                    Positioned(
+                      top: 50.0,
+                      left: 94.0,
+                      child: Container(
+                        height: 90.0,
+                        width: 90.0,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(65.0),
+                          border: Border.all(
+                            color: Colors.white,
+                            style: BorderStyle.solid,
+                            width: 2.0,
+                          ),
+                          image: DecorationImage(
+                            image: AssetImage(imagePath),
+                            fit: BoxFit.cover
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text(title, style: TitleTextStyleDark),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text(description, style: Body1TextStyle),
+                ),
+                Expanded(
+                  child: Align(
+                    alignment: FractionalOffset.bottomCenter,
+                    child:
+                      FloatingActionButton.extended(
+                        label: Text("Tilbage", style: SubTitleTextStyle),
+                        onPressed: () {
+                        Navigator.of(context).pop();
+                        },
+                        backgroundColor: BackgroundColor,
+                      )
+                  ),
+                )
+              ],
+            ),
+          ),
+        );
+      }
+    );
   }
 }

@@ -41,12 +41,13 @@ class Attraction {
           name: "Herakles og Hydraen",
           imagePath: "assets/images/herakles-og-hydraen.jpg",
           facts: [
-            Fact("Om Herakles og Hydraen",
+            Fact('Om Herakles og Hydraen',
+                'I den græske gudeverden er Herakles en helt som kæmper mod alle mulige dyr, virkelige som uvirkelige, og her en enorm vandslange med ni hoveder. I Helsingør elskede man ikke ligefrem skulpturen dengang den blev sat op, og den fik da også "kælenavnet" Den lille Mands Kamp mod Skattevæsenet.'
+            ),
+            Fact("Historie",
                 "På havnen i Helsingør, nærmere bestemt på nordre mole ud mod Øresund står Rudolph Tegners statue Herakles og Hydraen. Kunstneren begyndte at arbejde på statuen i 1919. Det tog omkring to år for ham og et par medarbejdere at fremstille statuen i gips. I 1930 tog Rudolph Tegner selv initiativ til at foreslå borgmester Peder Christensen at statuen, når den var støbt i bronze, skulle stå i Helsingør på stenbarrieren ud til Øresund. Herakles og Hydraen kom dog ikke til at stå i vandkanten. Da den blev afsløret den 20. november 1932, stod statuen på en høj granitsokkel i en kumme af granit med lavt broncerækværk - tegnet af arkitekt Emil Engell. Statuen stod godt nok ved Øresund, men ikke helt ude i vandkanten, men derimod på land og tæt på jernbanestationen og færgerne. Her stod statuen indtil november 1990, hvor den på grund af etableringen af nye gangbroer til færgerne måtte fjernes. Efter at have været opmagasineret nogle år, blev statuen genindviet den 25. maj 1994 på sin nuværende plads på nordre mole."
             ),
-            Fact('Græsk betydning',
-                'I den græske gudeverden er Herakles en helt som kæmper mod alle mulige dyr, virkelige som uvirkelige, og her en enorm vandslange med ni hoveder. I Helsingør elskede man ikke ligefrem skulpturen dengang den blev sat op, og den fik da da også "kælenavnet" Den lille Mands Kamp mod Skattevæsenet.'
-            )],
+            ],
           mapLocation: new LatLng(56.035364, 12.619877)
       ),
       Attraction(
@@ -68,7 +69,7 @@ class Attraction {
           imagePath: "assets/images/hamlet-scenen.jpg",
           facts: [
             Fact("Om Hamlet Scenen",
-                "HamletScenen forvalter en unik og umistelig kulturarv med afsæt i den altid mesterlige William Shakespeares værker, der gennem århundrederne vedbliver at være dybt vedkommende for enhver refleksion over den menneskelige tilstand og eksistens i går, i dag og i morgen. I en tid hvor døden er tabuiseret som aldrig før, og eksistens er noget de færreste funderer over mellem smartphones og småbørns-putning, insisterer HamletScenen på at skabe og præsentere teater, der tager favntag med livets store spørgsmål."
+                "HamletScenen forvalter en unik og umistelig kulturarv med afsæt i den altid mesterlige William Shakespeares værker, der gennem århundrederne vedbliver at være dybt vedkommende for enhver refleksion over den menneskelige tilstand og eksistens i går, i dag og i morgen. I en tid hvor døden er tabuiseret som aldrig før, og eksistens er noget de færreste funderer over, insisterer HamletScenen på at skabe og præsentere teater, der tager favntag med livets store spørgsmål."
             ),
             Fact("Historie",
                 "DEN KULTURELLE BRO MELLEM ENGLANDS SHAKESPEARE OG DANMARKS KRONBORG SLOT. "

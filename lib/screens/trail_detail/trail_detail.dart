@@ -35,27 +35,28 @@ class TrailDetail extends StatelessWidget {
                   ImageBanner(assetPath: trail.imagePath),
                 ]..addAll(textSections(trail))),
           ),
-          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
           floatingActionButton: FloatingActionButton(
-              child: const Icon(Icons.play_arrow),
-                  backgroundColor: Color.fromRGBO(128, 85, 0, 1.0),
+              child: const Icon(Icons.directions_run, color: BackgroundColor,),
+                  backgroundColor: Colors.white,
+                  tooltip: 'Start Rute',
                   onPressed: () {
                     _onStartTrailTap(context, trail.id);
                   },),
-        bottomNavigationBar: BottomAppBar(
-          shape: CircularNotchedRectangle(),
-          notchMargin: 4.0,
-          child: new Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-//                IconButton(icon: Icon(Icons.explore),
-//                  iconSize: 35,
-//                  color: Color.fromRGBO(128, 85, 0, 1.0),
-//                  onPressed: () {},),
-              ],
-          ),
-        ),
+//        bottomNavigationBar: BottomAppBar(
+//          shape: CircularNotchedRectangle(),
+//          notchMargin: 4.0,
+//          child: new Row(
+//            mainAxisSize: MainAxisSize.max,
+//            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//              children: <Widget>[
+////                IconButton(icon: Icon(Icons.explore),
+////                  iconSize: 35,
+////                  color: Color.fromRGBO(128, 85, 0, 1.0),
+////                  onPressed: () {},),
+//              ],
+//          ),
+//        ),
     );
   }
 

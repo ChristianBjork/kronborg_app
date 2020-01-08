@@ -21,7 +21,7 @@ class AttrTextSection extends StatelessWidget {
         Container(
             padding:
             const EdgeInsets.symmetric(vertical: 10.0, horizontal: _hPad),
-            child: Text(_body)),
+            child: Text(_body, style: SubTitleTextStyle,)),
       ],
     );
   }
