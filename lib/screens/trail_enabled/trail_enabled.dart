@@ -1,29 +1,79 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kronborg_app/models/attraction.dart';
 import 'package:kronborg_app/models/map_location.dart';
 import 'package:kronborg_app/models/trail.dart';
+import 'package:kronborg_app/presenters/trail_presenter.dart';
 import 'package:kronborg_app/style.dart';
 import 'package:latlong/latlong.dart';
+import 'package:mvp/mvp.dart';
 import 'package:provider/provider.dart';
 
 class TrailEnabled extends StatefulWidget {
+  final presenter = TrailPresenter();
 
-  final int _trailID;
-  const TrailEnabled(this._trailID);
+  final int trailID;
+  TrailEnabled({this.trailID, Key key}): super (key:key);
 
   @override
-  _TrailEnabledState createState() => _TrailEnabledState();
+  TrailEnabledState createState() => TrailEnabledState();
 }
 
-class _TrailEnabledState extends State<TrailEnabled> {
+class TrailEnabledState extends MvpScreen<TrailEnabled, Trail> {
+
+  //String _platformVersion = "Unknown";
+
+  @override
+  void initializeViewModel() {
+    viewModel = Trail();
+  }
+
+  @override
+  void initState(){
+    super.initState();
+
+    // binding the view to the presenter
+    widget.presenter.bind(applyState, TrailEnabled());
+
+    // Enabling social share
+    //initPlatformState();
+  }
+
+//  // Platform messages are asynchronous, so we initialize in an async method.
+//  Future<void> initPlatformState() async {
+//    String platformVersion;
+//    // Platform messages may fail, so we use a try/catch PlatformException.
+//    try {
+//      platformVersion = await SocialSharePlugin.platformVersion;
+//    } on PlatformException {
+//      platformVersion = 'Failed to get platform version.';
+//    }
+//
+//    // If the widget was removed from the tree while the asynchronous platform
+//    // message was in flight, we want to discard the reply rather than calling
+//    // setState to update our non-existent appearance.
+//    if (!mounted) return;
+//
+//    setState(() {
+//      _platformVersion = platformVersion;
+//    });
+//  }
+
+
+  @override
+  void dispose() {
+    super.dispose();
+    // Releasing presenter binding
+    widget.presenter.unbind();
+  }
 
   double attractionIconSize = 50.0;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    final trail = Trail.fetchByID(widget._trailID);
+    final trail = Trail.fetchByID(widget.trailID);
     final attractions = Attraction.fetchAll();
     var _currentLocation = Provider.of<MapLocation>(context);
     return new Scaffold(
@@ -37,7 +87,6 @@ class _TrailEnabledState extends State<TrailEnabled> {
             //center: new LatLng(_currentLocation.latitude, _currentLocation.longitude),
             zoom: 18.0),
             layers: [
-
               //Get map from MapBox API
               new TileLayerOptions(
                 urlTemplate:
@@ -66,6 +115,7 @@ class _TrailEnabledState extends State<TrailEnabled> {
                              Container(
                               child: GestureDetector(
                                 onTap: () {
+
                                   _scaffoldKey.currentState.showSnackBar(SnackBar(
                                     content: Text('Dette er din nuværende position'),backgroundColor: Color.fromRGBO(186, 134, 43, 1.0),
                                   ));
@@ -77,14 +127,21 @@ class _TrailEnabledState extends State<TrailEnabled> {
                   new Marker(
                     width: 45.00,
                     height: 45.00,
-                    point: trail.mapLocations[0],
+                    point: trail.mapLocations.first,
                     builder: (ctx) => Icon(Icons.adjust, color: Colors.green,),
                   ),
                   new Marker(
                       width: 45.00,
                       height: 45.00,
-                      point: new LatLng(trail.endLocation.latitude, trail.endLocation.longitude),
-                      builder: (ctx) => Icon(Icons.adjust, color: Colors.orange,)
+                      point: new LatLng(trail.mapLocations.last.latitude, trail.mapLocations.last.longitude),
+                      builder: (ctx) =>
+                          Container(
+                            child: GestureDetector(
+                              onTap: () => _showAlertDialog(),
+                              child: Icon(Icons.adjust, color: Colors.orange,),
+                            ),
+                          ),
+
                   ),
                   new Marker(
                     width: 45.00,
@@ -93,7 +150,7 @@ class _TrailEnabledState extends State<TrailEnabled> {
                     builder: (ctx) =>
                     Container(
                       child: GestureDetector(
-                        onTap: () => _showAttraction(context, attractions[1].name,attractions[1].facts[0].text, attractions[1].imagePath),
+                        onTap: () => _showAttraction(context, attractions[1].name,attractions[1].facts[0].text, attractions[1].imagePath, _currentLocation.latitude, _currentLocation.longitude, attractions[1].mapLocation.latitude, attractions[1].mapLocation.longitude),
                         child: Icon(Icons.location_on, color: Colors.brown, size: attractionIconSize,),
                       ),
                     ),
@@ -105,7 +162,7 @@ class _TrailEnabledState extends State<TrailEnabled> {
                     builder: (ctx) =>
                         Container(
                           child: GestureDetector(
-                            onTap: () => _showAttraction(context, attractions[2].name, attractions[2].facts[0].text, attractions[2].imagePath),
+                            onTap: () => _showAttraction(context, attractions[2].name, attractions[2].facts[0].text, attractions[2].imagePath, _currentLocation.latitude, _currentLocation.longitude, attractions[2].mapLocation.latitude, attractions[2].mapLocation.longitude),
                             child: Icon(Icons.location_on, color: Colors.brown, size: attractionIconSize,),
                           ),
                         ),
@@ -117,7 +174,7 @@ class _TrailEnabledState extends State<TrailEnabled> {
                     builder: (ctx) =>
                         Container(
                           child: GestureDetector(
-                            onTap: () => _showAttraction(context, attractions[3].name, attractions[3].facts[0].text, attractions[3].imagePath),
+                            onTap: () => _showAttraction(context, attractions[3].name, attractions[3].facts[0].text, attractions[3].imagePath, _currentLocation.latitude, _currentLocation.longitude, attractions[3].mapLocation.latitude, attractions[3].mapLocation.longitude),
                             child: Icon(Icons.location_on, color: Colors.brown, size: attractionIconSize,),
                           ),
                         ),
@@ -129,7 +186,7 @@ class _TrailEnabledState extends State<TrailEnabled> {
                     builder: (ctx) =>
                         Container(
                           child: GestureDetector(
-                            onTap: () => _showAttraction(context, attractions[4].name, attractions[4].facts[0].text, attractions[4].imagePath),
+                            onTap: () => _showAttraction(context, attractions[4].name, attractions[4].facts[0].text, attractions[4].imagePath, attractions[5].mapLocation.latitude, attractions[5].mapLocation.longitude, attractions[4].mapLocation.latitude, attractions[4].mapLocation.longitude),
                             child: Icon(Icons.location_on, color: Colors.brown, size: attractionIconSize),
                           ),
                         ),
@@ -141,7 +198,7 @@ class _TrailEnabledState extends State<TrailEnabled> {
                     builder: (ctx) =>
                         Container(
                           child: GestureDetector(
-                            onTap: () => _showAttraction(context, attractions[5].name, attractions[5].facts[0].text, attractions[5].imagePath),
+                            onTap: () => _showAttraction(context, attractions[5].name, attractions[5].facts[0].text, attractions[5].imagePath, _currentLocation.latitude, _currentLocation.longitude, attractions[5].mapLocation.latitude, attractions[5].mapLocation.longitude),
                             child: Icon(Icons.location_on, color: Colors.brown, size: attractionIconSize),
                           ),
                         ),
@@ -153,7 +210,7 @@ class _TrailEnabledState extends State<TrailEnabled> {
                     builder: (ctx) =>
                         Container(
                           child: GestureDetector(
-                            onTap: () => _showAttraction(context, attractions[6].name, attractions[6].facts[0].text, attractions[6].imagePath),
+                            onTap: () => _showAttraction(context, attractions[6].name, attractions[6].facts[0].text, attractions[6].imagePath, _currentLocation.latitude, _currentLocation.longitude, attractions[6].mapLocation.latitude, attractions[6].mapLocation.longitude),
                             child: Icon(Icons.location_on, color: Colors.brown, size: attractionIconSize),
                           ),
                         ),
@@ -165,7 +222,7 @@ class _TrailEnabledState extends State<TrailEnabled> {
                     builder: (ctx) =>
                         Container(
                           child: GestureDetector(
-                            onTap: () => _showAttraction(context, attractions[7].name, attractions[7].facts[0].text, attractions[7].imagePath),
+                            onTap: () => _showAttraction(context, attractions[7].name, attractions[7].facts[0].text, attractions[7].imagePath, _currentLocation.latitude, _currentLocation.longitude, attractions[7].mapLocation.latitude, attractions[7].mapLocation.longitude),
                             child: Icon(Icons.location_on, color: Colors.brown, size: attractionIconSize)
                           ),
                         ),
@@ -175,7 +232,11 @@ class _TrailEnabledState extends State<TrailEnabled> {
     );
   }
 
-  void _showAttraction(BuildContext context, String title, String description, String imagePath){
+  void _showAttraction(BuildContext context, String title, String description, String imagePath, double lat1, double long1, double lat2, double long2){
+
+    // distance to attraction tracker
+    widget.presenter.increaseAttractionsVisitedByOne(lat1, long1, lat2, long2);
+
     showDialog(
       context: context,
       barrierDismissible: true,
@@ -240,7 +301,7 @@ class _TrailEnabledState extends State<TrailEnabled> {
                     alignment: FractionalOffset.bottomCenter,
                     child:
                       FloatingActionButton.extended(
-                        label: Text("Tilbage", style: SubTitleTextStyle),
+                        label: Text("Tilbage, ${viewModel.attractionsVisited}", style: SubTitleTextStyle),
                         onPressed: () {
                         Navigator.of(context).pop();
                         },
@@ -251,6 +312,27 @@ class _TrailEnabledState extends State<TrailEnabled> {
               ],
             ),
           ),
+        );
+      }
+    );
+  }
+
+
+  void _showAlertDialog(){
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: new Text("MÅL"),
+          content: new Text("Du har gennemført en kronborg rute, og besøgt ${viewModel.attractionsVisited} attraktioner, vil du dele aktiviteten på fx?"),
+          actions: <Widget>[
+            FlatButton(
+              child: Icon(FontAwesomeIcons.facebook),
+              onPressed: () async {
+                //Share.text('KRONBORG', 'I visited ${viewModel.attractionsVisited} attractions', 'text/plain');
+              },
+            )
+          ],
         );
       }
     );

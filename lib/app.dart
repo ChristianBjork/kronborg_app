@@ -99,7 +99,7 @@ class _MyAppState extends State<MyApp> {
           screen = AttractionDetail(arguments['id']);
           break;
         case TrailEnabledRoute:
-          screen = TrailEnabled(arguments['id']);
+          screen = TrailEnabled(trailID: arguments['id'],);
           break;
         default:
           return null;

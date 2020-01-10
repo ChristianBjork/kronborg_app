@@ -9,10 +9,9 @@ class Trail {
   final String name;
   final double lengthKM;
   final String imagePath;
-  final int numOfAttractions = 0;
   final List<Fact> facts;
   final List<LatLng> mapLocations;
-  final MapLocation endLocation;
+  int attractionsVisited;
 
 
   Trail({
@@ -22,7 +21,7 @@ class Trail {
     this.imagePath,
     this.facts,
     this.mapLocations,
-    this.endLocation
+    this.attractionsVisited = 0,
   });
 
 
@@ -38,9 +37,6 @@ class Trail {
           Fact('Flot og spændende rute venter',
           'På denne rute møder du disse seværdigheder, osv osv osv')
         ],
-        endLocation: MapLocation(
-            latitude: 56.0391998,
-            longitude: 12.61691),
         mapLocations: <LatLng>[
           new LatLng(56.0387192, 12.61621), new LatLng(56.0385208, 12.6166496), new LatLng(56.0384903, 12.6170902), new LatLng(56.0380211, 12.6181898),
           new LatLng(56.0376587, 12.6189699), new LatLng(56.0371017, 12.6191502), new LatLng(56.0364685, 12.6193104), new LatLng(56.0364418, 12.6194096),
@@ -73,9 +69,6 @@ class Trail {
             Fact('Kom tæt på Kronborg',
                 'På denne rute møder du disse seværdigheder, osv osv osv')
           ],
-          endLocation: MapLocation(
-              latitude: 56.0397301,
-              longitude: 12.6199102),
           mapLocations:
           <LatLng>[
             new LatLng(56.0391998, 12.61691 ), new LatLng(56.0395508, 12.6175203), new LatLng(56.0395699, 12.6176205), new LatLng(56.0395813, 12.6183395),
