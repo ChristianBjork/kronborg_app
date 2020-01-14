@@ -1,7 +1,6 @@
 /// Represents some descriptive information about a [Trail]..
 import 'package:latlong/latlong.dart';
 import 'fact.dart';
-import 'map_location.dart';
 
 class Trail {
 
@@ -21,7 +20,7 @@ class Trail {
     this.imagePath,
     this.facts,
     this.mapLocations,
-    this.attractionsVisited = 0,
+    this.attractionsVisited = 0
   });
 
 
@@ -67,7 +66,7 @@ class Trail {
           imagePath: 'assets/images/kronborg_nær.jpeg',
           facts: [
             Fact('Kom tæt på Kronborg',
-                'På denne rute møder du disse seværdigheder, osv osv osv')
+                'På denne rute møder du disse seværdigheder, osv osv osv,')
           ],
           mapLocations:
           <LatLng>[

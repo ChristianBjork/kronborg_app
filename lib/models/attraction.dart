@@ -9,13 +9,15 @@ class Attraction {
   final String imagePath;
   final List<Fact> facts;
   final LatLng mapLocation;
+  bool isVisited;
 
   Attraction({
     this.id,
     this.name,
     this.imagePath,
     this.facts,
-    this.mapLocation
+    this.mapLocation,
+    this.isVisited = false
   });
 
   // Hardcoded attractions --> needs to call a database in future version
@@ -69,7 +71,7 @@ class Attraction {
           imagePath: "assets/images/hamlet-scenen.jpg",
           facts: [
             Fact("Om Hamlet Scenen",
-                "HamletScenen forvalter en unik og umistelig kulturarv med afsæt i den altid mesterlige William Shakespeares værker, der gennem århundrederne vedbliver at være dybt vedkommende for enhver refleksion over den menneskelige tilstand og eksistens i går, i dag og i morgen. I en tid hvor døden er tabuiseret som aldrig før, og eksistens er noget de færreste funderer over, insisterer HamletScenen på at skabe og præsentere teater, der tager favntag med livets store spørgsmål."
+                "I en tid hvor døden er tabuiseret som aldrig før, og eksistens er noget de færreste funderer over, insisterer HamletScenen på at skabe og præsentere teater, der tager favntag med livets store spørgsmål."
             ),
             Fact("Historie",
                 "DEN KULTURELLE BRO MELLEM ENGLANDS SHAKESPEARE OG DANMARKS KRONBORG SLOT. "

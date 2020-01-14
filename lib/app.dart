@@ -13,9 +13,10 @@ import 'services/location_service.dart';
 import 'style.dart';
 
 const FrontPageRoute = '/';
-const TrailDetailRoute = '/trail_detail';
+const TrailsRoute = '/trails';
+const TrailDetailRoute = '/trails/trail_detail';
 const AttractionDetailRoute = '/attraction_detail';
-const TrailEnabledRoute = '/trail_enabled';
+const TrailEnabledRoute = '/trails/trail_detail/trail_enabled';
 
 class App extends StatelessWidget {
   @override
@@ -68,7 +69,7 @@ class _MyAppState extends State<MyApp> {
           items: [
             BottomNavigationBarItem(
                 icon: Icon(Icons.map),
-                title: Text('Ruter')
+                title: Text('Ruter'),
             ),
             BottomNavigationBarItem(
                 icon: Icon(Icons.home),
@@ -92,8 +93,11 @@ class _MyAppState extends State<MyApp> {
         case FrontPageRoute:
           screen = FrontPage();
           break;
+        case TrailsRoute:
+          screen = Trails();
+          break;
         case TrailDetailRoute:
-          screen = TrailDetail(arguments['id']);
+          screen = TrailDetail(trailID: arguments['id']);
           break;
         case AttractionDetailRoute:
           screen = AttractionDetail(arguments['id']);

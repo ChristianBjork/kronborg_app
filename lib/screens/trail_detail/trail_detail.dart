@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kronborg_app/models/trail.dart';
+import 'package:kronborg_app/screens/trail_enabled/trail_enabled.dart';
 import 'package:kronborg_app/style.dart';
 import 'package:kronborg_app/widgets/image_banner.dart';
 import 'package:kronborg_app/widgets/trail_tile.dart';
@@ -9,13 +10,13 @@ import 'trail_text_section.dart';
 // The Screen of attraction_detail. It takes one argument which is trailID
 class TrailDetail extends StatelessWidget {
 
-  final int _trailID;
+  final int trailID;
 
-  TrailDetail(this._trailID);
+  TrailDetail({this.trailID, Key key}): super (key:key);
 
   @override
   Widget build(BuildContext context) {
-    final trail = Trail.fetchByID(_trailID);
+    final trail = Trail.fetchByID(trailID);
     return Scaffold(
         appBar: AppBar(
           title: Text(trail.name),
@@ -36,27 +37,15 @@ class TrailDetail extends StatelessWidget {
                 ]..addAll(textSections(trail))),
           ),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: FloatingActionButton(
-              child: const Icon(Icons.directions_run, color: BackgroundColor,),
-                  backgroundColor: Colors.white,
-                  tooltip: 'Start Rute',
-                  onPressed: () {
-                    _onStartTrailTap(context, trail.id);
-                  },),
-//        bottomNavigationBar: BottomAppBar(
-//          shape: CircularNotchedRectangle(),
-//          notchMargin: 4.0,
-//          child: new Row(
-//            mainAxisSize: MainAxisSize.max,
-//            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//              children: <Widget>[
-////                IconButton(icon: Icon(Icons.explore),
-////                  iconSize: 35,
-////                  color: Color.fromRGBO(128, 85, 0, 1.0),
-////                  onPressed: () {},),
-//              ],
-//          ),
-//        ),
+          floatingActionButton: Padding(
+            padding: const EdgeInsets.only(bottom: 25.0),
+                  child: FloatingActionButton(
+                      child: const Icon(Icons.directions_run, color: BackgroundColor,),
+                          backgroundColor: Colors.white,
+                          tooltip: 'Start Rute',
+                          onPressed: () {
+                            _onStartTrailTap(context, trail.id);
+                          },),)
     );
   }
 

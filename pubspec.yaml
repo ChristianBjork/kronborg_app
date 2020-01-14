@@ -23,6 +23,8 @@ dependencies:
   provider: ^3.0.0
   location: ^2.3.5
 
+  esys_flutter_share: ^1.0.2
+
   font_awesome_flutter: ^8.5.0
   mvp: ^1.0.0
 

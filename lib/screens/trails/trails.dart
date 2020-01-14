@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kronborg_app/models/trail.dart';
+import 'package:kronborg_app/screens/trail_detail/trail_detail.dart';
 import 'package:kronborg_app/style.dart';
 import 'package:kronborg_app/widgets/image_banner.dart';
 import '../../app.dart';
@@ -7,6 +8,8 @@ import 'trails_tile_overlay.dart';
 
 
 class Trails extends StatelessWidget {
+
+  const Trails({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

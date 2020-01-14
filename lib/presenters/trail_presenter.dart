@@ -1,4 +1,6 @@
 import 'dart:math';
+import 'package:kronborg_app/models/attraction.dart';
+import 'package:kronborg_app/models/map_location.dart';
 import 'package:kronborg_app/models/trail.dart';
 import 'package:kronborg_app/screens/trail_enabled/trail_enabled.dart';
 import 'package:latlong/latlong.dart';
@@ -18,6 +20,13 @@ class TrailPresenter extends MvpPresenter<Trail, TrailEnabled> {
     }
   }
 
+  bool isInGoalRange(double lat1, double long1, double lat2, double long2) {
+    if(_getDistanceFromLatLonInKm(lat1, long1, lat2, long2) < 0.20){
+      return true;
+    }
+    return false;
+  }
+
   // This function is reusable code from stack overflow.
   double _getDistanceFromLatLonInKm(double lat1,double long1,double lat2, double long2) {
     var R = 6371; // Radius of the earth in km
@@ -26,13 +35,14 @@ class TrailPresenter extends MvpPresenter<Trail, TrailEnabled> {
     var a =
         sin(dLat/2) * sin(dLat/2) +
             cos(_deg2rad(lat1)) * cos(_deg2rad(lat2)) *
-                sin(dLon/2) * sin(dLon/2)
-    ;
+                sin(dLon/2) * sin(dLon/2);
+
     var c = 2 * atan2(sqrt(a), sqrt(1-a));
     var d = R * c; // Distance in km
     return d;
   }
 
+  // This function is reusable code from stack overflow.
   double _deg2rad(deg) {
     return deg * (PI/180);
   }

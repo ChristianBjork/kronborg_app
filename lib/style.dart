@@ -49,7 +49,7 @@ const SubTitleTextStyle = TextStyle(
 const CaptionTextStyle = TextStyle(
   fontFamily: FontNameDefault,
   fontWeight: FontWeight.w300,
-  fontSize: SmallTextSize,
+  fontSize: MediumTextSize,
   color: TextColorDark,
 );
 

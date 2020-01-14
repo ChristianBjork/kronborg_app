@@ -1,10 +1,13 @@
+import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:kronborg_app/app.dart';
 import 'package:kronborg_app/models/attraction.dart';
 import 'package:kronborg_app/models/map_location.dart';
 import 'package:kronborg_app/models/trail.dart';
 import 'package:kronborg_app/presenters/trail_presenter.dart';
+import 'package:kronborg_app/screens/trails/trails.dart';
 import 'package:kronborg_app/style.dart';
 import 'package:latlong/latlong.dart';
 import 'package:mvp/mvp.dart';
@@ -22,8 +25,6 @@ class TrailEnabled extends StatefulWidget {
 
 class TrailEnabledState extends MvpScreen<TrailEnabled, Trail> {
 
-  //String _platformVersion = "Unknown";
-
   @override
   void initializeViewModel() {
     viewModel = Trail();
@@ -35,31 +36,7 @@ class TrailEnabledState extends MvpScreen<TrailEnabled, Trail> {
 
     // binding the view to the presenter
     widget.presenter.bind(applyState, TrailEnabled());
-
-    // Enabling social share
-    //initPlatformState();
   }
-
-//  // Platform messages are asynchronous, so we initialize in an async method.
-//  Future<void> initPlatformState() async {
-//    String platformVersion;
-//    // Platform messages may fail, so we use a try/catch PlatformException.
-//    try {
-//      platformVersion = await SocialSharePlugin.platformVersion;
-//    } on PlatformException {
-//      platformVersion = 'Failed to get platform version.';
-//    }
-//
-//    // If the widget was removed from the tree while the asynchronous platform
-//    // message was in flight, we want to discard the reply rather than calling
-//    // setState to update our non-existent appearance.
-//    if (!mounted) return;
-//
-//    setState(() {
-//      _platformVersion = platformVersion;
-//    });
-//  }
-
 
   @override
   void dispose() {
@@ -80,6 +57,12 @@ class TrailEnabledState extends MvpScreen<TrailEnabled, Trail> {
       key: _scaffoldKey,
         appBar: AppBar(
           title: Text(trail.name),
+            actions: <Widget>[
+              FlatButton.icon(
+                  icon: Icon(Icons.location_on, color: Colors.white,),
+                  label: Text('${viewModel.attractionsVisited}/8', style: SubTitleTextStyle,))
+        // action button
+            ]
         ),
         body: FlutterMap(
           options: new MapOptions(
@@ -137,11 +120,10 @@ class TrailEnabledState extends MvpScreen<TrailEnabled, Trail> {
                       builder: (ctx) =>
                           Container(
                             child: GestureDetector(
-                              onTap: () => _showAlertDialog(),
+                              onTap: () => _showFinishDialog(trail, _currentLocation),
                               child: Icon(Icons.adjust, color: Colors.orange,),
                             ),
                           ),
-
                   ),
                   new Marker(
                     width: 45.00,
@@ -150,7 +132,7 @@ class TrailEnabledState extends MvpScreen<TrailEnabled, Trail> {
                     builder: (ctx) =>
                     Container(
                       child: GestureDetector(
-                        onTap: () => _showAttraction(context, attractions[1].name,attractions[1].facts[0].text, attractions[1].imagePath, _currentLocation.latitude, _currentLocation.longitude, attractions[1].mapLocation.latitude, attractions[1].mapLocation.longitude),
+                        onTap: () => _showAttraction(context, attractions[1], _currentLocation.latitude, _currentLocation.longitude, attractions[1].mapLocation.latitude, attractions[1].mapLocation.longitude),
                         child: Icon(Icons.location_on, color: Colors.brown, size: attractionIconSize,),
                       ),
                     ),
@@ -162,7 +144,7 @@ class TrailEnabledState extends MvpScreen<TrailEnabled, Trail> {
                     builder: (ctx) =>
                         Container(
                           child: GestureDetector(
-                            onTap: () => _showAttraction(context, attractions[2].name, attractions[2].facts[0].text, attractions[2].imagePath, _currentLocation.latitude, _currentLocation.longitude, attractions[2].mapLocation.latitude, attractions[2].mapLocation.longitude),
+                            onTap: () => _showAttraction(context, attractions[2], _currentLocation.latitude, _currentLocation.longitude, attractions[2].mapLocation.latitude, attractions[2].mapLocation.longitude),
                             child: Icon(Icons.location_on, color: Colors.brown, size: attractionIconSize,),
                           ),
                         ),
@@ -174,7 +156,7 @@ class TrailEnabledState extends MvpScreen<TrailEnabled, Trail> {
                     builder: (ctx) =>
                         Container(
                           child: GestureDetector(
-                            onTap: () => _showAttraction(context, attractions[3].name, attractions[3].facts[0].text, attractions[3].imagePath, _currentLocation.latitude, _currentLocation.longitude, attractions[3].mapLocation.latitude, attractions[3].mapLocation.longitude),
+                            onTap: () => _showAttraction(context, attractions[3], _currentLocation.latitude, _currentLocation.longitude, attractions[3].mapLocation.latitude, attractions[3].mapLocation.longitude),
                             child: Icon(Icons.location_on, color: Colors.brown, size: attractionIconSize,),
                           ),
                         ),
@@ -186,7 +168,7 @@ class TrailEnabledState extends MvpScreen<TrailEnabled, Trail> {
                     builder: (ctx) =>
                         Container(
                           child: GestureDetector(
-                            onTap: () => _showAttraction(context, attractions[4].name, attractions[4].facts[0].text, attractions[4].imagePath, attractions[5].mapLocation.latitude, attractions[5].mapLocation.longitude, attractions[4].mapLocation.latitude, attractions[4].mapLocation.longitude),
+                            onTap: () => _showAttraction(context, attractions[4], _currentLocation.latitude, _currentLocation.longitude, attractions[4].mapLocation.latitude, attractions[4].mapLocation.longitude),
                             child: Icon(Icons.location_on, color: Colors.brown, size: attractionIconSize),
                           ),
                         ),
@@ -198,7 +180,7 @@ class TrailEnabledState extends MvpScreen<TrailEnabled, Trail> {
                     builder: (ctx) =>
                         Container(
                           child: GestureDetector(
-                            onTap: () => _showAttraction(context, attractions[5].name, attractions[5].facts[0].text, attractions[5].imagePath, _currentLocation.latitude, _currentLocation.longitude, attractions[5].mapLocation.latitude, attractions[5].mapLocation.longitude),
+                            onTap: () => _showAttraction(context, attractions[5], _currentLocation.latitude, _currentLocation.longitude, attractions[5].mapLocation.latitude, attractions[5].mapLocation.longitude),
                             child: Icon(Icons.location_on, color: Colors.brown, size: attractionIconSize),
                           ),
                         ),
@@ -210,7 +192,7 @@ class TrailEnabledState extends MvpScreen<TrailEnabled, Trail> {
                     builder: (ctx) =>
                         Container(
                           child: GestureDetector(
-                            onTap: () => _showAttraction(context, attractions[6].name, attractions[6].facts[0].text, attractions[6].imagePath, _currentLocation.latitude, _currentLocation.longitude, attractions[6].mapLocation.latitude, attractions[6].mapLocation.longitude),
+                            onTap: () => _showAttraction(context, attractions[6], _currentLocation.latitude, _currentLocation.longitude, attractions[6].mapLocation.latitude, attractions[6].mapLocation.longitude),
                             child: Icon(Icons.location_on, color: Colors.brown, size: attractionIconSize),
                           ),
                         ),
@@ -222,7 +204,7 @@ class TrailEnabledState extends MvpScreen<TrailEnabled, Trail> {
                     builder: (ctx) =>
                         Container(
                           child: GestureDetector(
-                            onTap: () => _showAttraction(context, attractions[7].name, attractions[7].facts[0].text, attractions[7].imagePath, _currentLocation.latitude, _currentLocation.longitude, attractions[7].mapLocation.latitude, attractions[7].mapLocation.longitude),
+                            onTap: () => _showAttraction(context, attractions[7], _currentLocation.latitude, _currentLocation.longitude, attractions[7].mapLocation.latitude, attractions[7].mapLocation.longitude),
                             child: Icon(Icons.location_on, color: Colors.brown, size: attractionIconSize)
                           ),
                         ),
@@ -232,9 +214,9 @@ class TrailEnabledState extends MvpScreen<TrailEnabled, Trail> {
     );
   }
 
-  void _showAttraction(BuildContext context, String title, String description, String imagePath, double lat1, double long1, double lat2, double long2){
+  void _showAttraction(BuildContext context, Attraction attraction, double lat1, double long1, double lat2, double long2){
 
-    // distance to attraction tracker
+    // This function is only executed if the user is within a certain distance from an attraction
     widget.presenter.increaseAttractionsVisitedByOne(lat1, long1, lat2, long2);
 
     showDialog(
@@ -244,7 +226,7 @@ class TrailEnabledState extends MvpScreen<TrailEnabled, Trail> {
         return Dialog(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
           child: Container(
-            height: 600.0,
+            height: 500.0,
             width: 250.0,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.0)
@@ -280,7 +262,7 @@ class TrailEnabledState extends MvpScreen<TrailEnabled, Trail> {
                             width: 2.0,
                           ),
                           image: DecorationImage(
-                            image: AssetImage(imagePath),
+                            image: AssetImage(attraction.imagePath),
                             fit: BoxFit.cover
                           ),
                         ),
@@ -290,18 +272,18 @@ class TrailEnabledState extends MvpScreen<TrailEnabled, Trail> {
                 ),
                 Padding(
                   padding: EdgeInsets.all(10.0),
-                  child: Text(title, style: TitleTextStyleDark),
+                  child: Text(attraction.name, style: TitleTextStyleDark),
                 ),
                 Padding(
                   padding: EdgeInsets.all(10.0),
-                  child: Text(description, style: Body1TextStyle),
+                  child: Text(attraction.facts[0].text, style: Body1TextStyle),
                 ),
                 Expanded(
                   child: Align(
                     alignment: FractionalOffset.bottomCenter,
                     child:
                       FloatingActionButton.extended(
-                        label: Text("Tilbage, ${viewModel.attractionsVisited}", style: SubTitleTextStyle),
+                        label: Text("Tilbage", style: SubTitleTextStyle),
                         onPressed: () {
                         Navigator.of(context).pop();
                         },
@@ -318,23 +300,55 @@ class TrailEnabledState extends MvpScreen<TrailEnabled, Trail> {
   }
 
 
-  void _showAlertDialog(){
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: new Text("MÅL"),
-          content: new Text("Du har gennemført en kronborg rute, og besøgt ${viewModel.attractionsVisited} attraktioner, vil du dele aktiviteten på fx?"),
-          actions: <Widget>[
-            FlatButton(
-              child: Icon(FontAwesomeIcons.facebook),
-              onPressed: () async {
-                //Share.text('KRONBORG', 'I visited ${viewModel.attractionsVisited} attractions', 'text/plain');
-              },
-            )
-          ],
-        );
-      }
-    );
+  void _showFinishDialog(Trail trail, MapLocation currentLocation,){
+    if(widget.presenter.isInGoalRange(currentLocation.latitude, currentLocation.longitude, trail.mapLocations.last.latitude, trail.mapLocations.last.longitude) == true) {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: new Text("VELKOMMEN I MÅL", style: TitleTextStyleDark,),
+              content: new Text("Du har gennemført kronborg ruten ${trail
+                  .name} som strækker sig på ${trail
+                  .lengthKM}km. \nDu besøgte ${viewModel
+                  .attractionsVisited} attraktioner som befandt sig nær denne interessante rute",
+                style: CaptionTextStyle,),
+              actions: <Widget>[
+                FlatButton(
+                  child:
+                  Text('Find Ny Rute',
+                    style: TextStyle(fontFamily: FontNameDefault,
+                        fontWeight: FontWeight.w300,
+                        fontSize: LargeTextSize,
+                        color: BackgroundColor),),
+                  //Icon(FontAwesomeIcons.backward, color: BackgroundColor,),
+                  onPressed: () {
+                    Navigator.pushNamed(context, FrontPageRoute);
+                  },
+                ),
+                FlatButton(
+                  child:
+                  Text('Del', style: TextStyle(fontFamily: FontNameDefault,
+                      fontWeight: FontWeight.w300,
+                      fontSize: LargeTextSize,
+                      color: BackgroundColor),),
+                  //Icon(FontAwesomeIcons.share, color: BackgroundColor,),
+                  onPressed: () {
+                    Share.text(
+                        'Kronborg Ruter',
+                        'Jeg har netop gennemført en af Kronborgs spændende vandrings ruter, hvor jeg besøgte ${viewModel
+                            .attractionsVisited} flotte og beundringsværdige attraktioner, '
+                            'så som Han statuen og The Garbage fish, som består af efterladt skrald.',
+                        'text/plain');
+                    Navigator.pushNamed(context, FrontPageRoute);
+                  },
+                )
+              ],
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20.0))
+              ),
+            );
+          }
+      );
+    }
   }
 }
