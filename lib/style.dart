@@ -59,3 +59,9 @@ const Body1TextStyle = TextStyle(
   fontSize: MediumTextSize,
   color: TextColorDark,
 );
+const AlertDialogChoiceStyle = TextStyle(
+  fontFamily: FontNameDefault,
+  fontWeight: FontWeight.w300,
+  fontSize: LargeTextSize,
+  color: BackgroundColor
+);

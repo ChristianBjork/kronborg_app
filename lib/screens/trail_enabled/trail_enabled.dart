@@ -1,13 +1,11 @@
 import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kronborg_app/app.dart';
 import 'package:kronborg_app/models/attraction.dart';
 import 'package:kronborg_app/models/map_location.dart';
 import 'package:kronborg_app/models/trail.dart';
 import 'package:kronborg_app/presenters/trail_presenter.dart';
-import 'package:kronborg_app/screens/trails/trails.dart';
 import 'package:kronborg_app/style.dart';
 import 'package:latlong/latlong.dart';
 import 'package:mvp/mvp.dart';
@@ -53,7 +51,9 @@ class TrailEnabledState extends MvpScreen<TrailEnabled, Trail> {
     final trail = Trail.fetchByID(widget.trailID);
     final attractions = Attraction.fetchAll();
     var _currentLocation = Provider.of<MapLocation>(context);
-    return new Scaffold(
+    return new WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
       key: _scaffoldKey,
         appBar: AppBar(
           title: Text(trail.name),
@@ -66,8 +66,8 @@ class TrailEnabledState extends MvpScreen<TrailEnabled, Trail> {
         ),
         body: FlutterMap(
           options: new MapOptions(
-            //center: new LatLng(56.0387192, 12.61621),
-            center: new LatLng(_currentLocation.latitude, _currentLocation.longitude),
+            center: new LatLng(56.0387192, 12.61621),
+            //center: new LatLng(_currentLocation.latitude, _currentLocation.longitude),
             zoom: 18.0),
             layers: [
               //Get map from MapBox API
@@ -222,6 +222,7 @@ class TrailEnabledState extends MvpScreen<TrailEnabled, Trail> {
                   ),
             ]),
         ],),
+    )
     );
   }
 
@@ -310,7 +311,6 @@ class TrailEnabledState extends MvpScreen<TrailEnabled, Trail> {
     );
   }
 
-
   void _showFinishDialog(Trail trail, MapLocation currentLocation,){
     if(widget.presenter.isInGoalRange(currentLocation.latitude, currentLocation.longitude, trail.mapLocations.last.latitude, trail.mapLocations.last.longitude) == true) {
       showDialog(
@@ -326,22 +326,14 @@ class TrailEnabledState extends MvpScreen<TrailEnabled, Trail> {
                 FlatButton(
                   child:
                   Text('Find Ny Rute',
-                    style: TextStyle(fontFamily: FontNameDefault,
-                        fontWeight: FontWeight.w300,
-                        fontSize: LargeTextSize,
-                        color: BackgroundColor),),
-                  //Icon(FontAwesomeIcons.backward, color: BackgroundColor,),
+                    style: AlertDialogChoiceStyle),
                   onPressed: () {
                     Navigator.pushNamed(context, FrontPageRoute);
                   },
                 ),
                 FlatButton(
                   child:
-                  Text('Del', style: TextStyle(fontFamily: FontNameDefault,
-                      fontWeight: FontWeight.w300,
-                      fontSize: LargeTextSize,
-                      color: BackgroundColor),),
-                  //Icon(FontAwesomeIcons.share, color: BackgroundColor,),
+                  Text('Del', style: AlertDialogChoiceStyle),
                   onPressed: () {
                     Share.text(
                         'Kronborg Ruter',
@@ -360,5 +352,28 @@ class TrailEnabledState extends MvpScreen<TrailEnabled, Trail> {
           }
       );
     }
+  }
+
+  Future<bool> _onWillPop() async {
+    return (await showDialog(
+      context: context,
+      builder: (context) => new AlertDialog(
+        title: new Text('Du er ved at afslutte ruten!', style: TitleTextStyleDark,),
+        content: new Text('Du vil miste dine attraktionsbesøg, hvis du afslutter. \nEr du sikker på at du vil afslutte?', style: CaptionTextStyle,),
+        actions: <Widget>[
+          new FlatButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: new Text('Nej', style: AlertDialogChoiceStyle,),
+          ),
+          new FlatButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: new Text('Ja', style: AlertDialogChoiceStyle,),
+          ),
+        ],
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(20.0))
+        ),
+      ),
+    )) ?? false;
   }
 }

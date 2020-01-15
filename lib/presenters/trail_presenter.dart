@@ -14,7 +14,7 @@ class TrailPresenter extends MvpPresenter<Trail, TrailEnabled> {
   }
 
   void increaseAttractionsVisitedByOne(double lat1, double long1, double lat2, double long2){
-    if (_getDistanceFromLatLonInKm(lat1, long1, lat2, long2) < 0.50) {
+    if (_getDistanceFromLatLonInKm(lat1, long1, lat2, long2) < 0.20) {
       viewModel.attractionsVisited++;
       callback(viewModel);
     }

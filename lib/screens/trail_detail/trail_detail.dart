@@ -28,10 +28,6 @@ class TrailDetail extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-//                  Padding(
-//                    padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 4.0),
-//                    child: TrailTile(trail: trail),
-//                  ),
                   ImageBanner(assetPath: trail.imagePath),
                 ]..addAll(textSections(trail))),
           ),
