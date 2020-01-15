@@ -44,7 +44,7 @@ class Attraction {
           imagePath: "assets/images/herakles-og-hydraen.jpg",
           facts: [
             Fact('Om Herakles og Hydraen',
-                'I den græske gudeverden er Herakles en helt som kæmper mod alle mulige dyr, virkelige som uvirkelige, og her en enorm vandslange med ni hoveder. I Helsingør elskede man ikke ligefrem skulpturen dengang den blev sat op, og den fik da også "kælenavnet" Den lille Mands Kamp mod Skattevæsenet.'
+                'I den græske gudeverden er Herakles en helt som kæmper mod alle mulige dyr, virkelige som uvirkelige, og her en enorm vandslange med ni hoveder. \nI Helsingør elskede man ikke ligefrem skulpturen dengang den blev sat op, og den fik da også "kælenavnet" Den lille Mands Kamp mod Skattevæsenet.'
             ),
             Fact("Historie",
                 "På havnen i Helsingør, nærmere bestemt på nordre mole ud mod Øresund står Rudolph Tegners statue Herakles og Hydraen. Kunstneren begyndte at arbejde på statuen i 1919. Det tog omkring to år for ham og et par medarbejdere at fremstille statuen i gips. I 1930 tog Rudolph Tegner selv initiativ til at foreslå borgmester Peder Christensen at statuen, når den var støbt i bronze, skulle stå i Helsingør på stenbarrieren ud til Øresund. Herakles og Hydraen kom dog ikke til at stå i vandkanten. Da den blev afsløret den 20. november 1932, stod statuen på en høj granitsokkel i en kumme af granit med lavt broncerækværk - tegnet af arkitekt Emil Engell. Statuen stod godt nok ved Øresund, men ikke helt ude i vandkanten, men derimod på land og tæt på jernbanestationen og færgerne. Her stod statuen indtil november 1990, hvor den på grund af etableringen af nye gangbroer til færgerne måtte fjernes. Efter at have været opmagasineret nogle år, blev statuen genindviet den 25. maj 1994 på sin nuværende plads på nordre mole."
@@ -85,9 +85,8 @@ class Attraction {
           imagePath: "assets/images/garbage_fish.png",
           facts: [
             Fact("Om Garbage Fish",
-                    "Denne flotte....."            ),
-            Fact("Historie",
-              "Dens historie....."
+                    'The Garbage Fish er en del af et samfundskunstprojekt kendt som "Life in the Sound", denne store, '
+                        'farverige fisk på marinaen nær Kronborg Slot blev afsluttet i 2014 af den japanske kunstner Hideaki Shibata, der også er kendt som Yodogawa Technique.'
             )],
           mapLocation: new LatLng(56.037861, 12.615442)
       ),
@@ -97,10 +96,9 @@ class Attraction {
           imagePath: "assets/images/han_statue.jpeg",
           facts: [
             Fact("Om Han Statuen",
-                "Han statuen er"
-            ),
-            Fact("Historie",
-                "Dengang"
+                "Figuren fremstiller en ung mand siddende på en sten, begge dele støbt i blankpoleret stål. "
+                    "Kropssproget er givet ved, at det er en kønsspecifik variation af den lille havfrue på Langelinje i København."
+                    "’Han’ er fremstillet i stål, som giver den et moderne udtryk, og er et vidnesbyrd om den udvikling, der er sket fra ’Den lille Havfrue’ kom til verden."
             )],
           mapLocation: new LatLng(56.037361, 12.615805)
       ),
@@ -110,18 +108,38 @@ class Attraction {
           imagePath: "assets/images/kronværkerne.jpg",
           facts: [
             Fact("Om Kronværkerne",
-                "Kronværkerne er"
+                "Kronværkerne er kreative rum, der er åbne for offentligheden. \nVi laver glas, keramik, maleri, smykker, foto, beklædning, skulpturer og grafiske design."
+                    "\nKom ind og se hvordan kunstnere, designere og kunsthåndværkere arbejder."
+                    "\nStederne er kombineret værksted og butik, så du kan både se og købe."
             )],
           mapLocation: new LatLng(56.039220, 12.619523)
       ),
       Attraction(
           id: 8,
-          name: "Souvenir Shop",
+          name: "Slotskirke Stranden",
+          imagePath: "assets/images/kronborg_strand.jpg",
+          facts: [
+            Fact("om Slotskirke Stranden",
+                "Stranden ligger som en blomme i et æg mellem Helsingør Nordhavn og Kronborg med M/S Museet for Søfart og Værftshallernes madmarked bagved og en flot udsigt til Sverige og Helsingborg på den anden side af sundet."
+            ),
+            Fact("Faciliteter",
+                "Badebro \nParkeringsplads i nærheden \nToilet \nTildelt Blå Flag \nBorde/bænke"
+            )],
+          mapLocation: new LatLng(56.038331, 12.623794)
+      ),
+      Attraction(
+          id: 9,
+          name: "Slotsbutikken",
           imagePath: "assets/images/souvenir.jpg",
           facts: [
-            Fact("Velkommen ind",
-                "Her kan du købe..."
-            )],
+            Fact("Velkommen Til Slotsbutikken",
+                "I slotsbutikken finder du et unikt udvalg af kvalitetsvarer, der har tilknytning til Kronborgs historie, slottets attraktioner og Kongehuset."
+                    "\n\nI butikken kan du købe postkort, plakater, smykker, boligartikler, tørklæder, tøj, porcelæn, puslespil, nøgleringe, vin, Kronborgs egen whisky og øl."
+
+            ),
+            Fact("Ekstra",
+            "Slotsbutikken sælger også guidebøger til slottenes seværdigheder og et bredt udvalg af litteratur om Kongehuset og Danmarks kongeslotte."
+            " Butikken er åben i slottets åbningstid og ligger i slotsgården.")],
           mapLocation: new LatLng(56.039602, 12.619342)
       ),
 

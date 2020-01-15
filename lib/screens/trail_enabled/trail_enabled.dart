@@ -60,14 +60,14 @@ class TrailEnabledState extends MvpScreen<TrailEnabled, Trail> {
             actions: <Widget>[
               FlatButton.icon(
                   icon: Icon(Icons.location_on, color: Colors.white,),
-                  label: Text('${viewModel.attractionsVisited}/8', style: SubTitleTextStyle,))
+                  label: Text('${viewModel.attractionsVisited}/4', style: SubTitleTextStyle,))
         // action button
             ]
         ),
         body: FlutterMap(
           options: new MapOptions(
-            center: new LatLng(56.0387192, 12.61621),
-            //center: new LatLng(_currentLocation.latitude, _currentLocation.longitude),
+            //center: new LatLng(56.0387192, 12.61621),
+            center: new LatLng(_currentLocation.latitude, _currentLocation.longitude),
             zoom: 18.0),
             layers: [
               //Get map from MapBox API
@@ -98,7 +98,6 @@ class TrailEnabledState extends MvpScreen<TrailEnabled, Trail> {
                              Container(
                               child: GestureDetector(
                                 onTap: () {
-
                                   _scaffoldKey.currentState.showSnackBar(SnackBar(
                                     content: Text('Dette er din nuværende position'),backgroundColor: Color.fromRGBO(186, 134, 43, 1.0),
                                   ));
@@ -209,6 +208,18 @@ class TrailEnabledState extends MvpScreen<TrailEnabled, Trail> {
                           ),
                         ),
                   ),
+                  new Marker(
+                    width: 45.00,
+                    height: 45.00,
+                    point: attractions[8].mapLocation,
+                    builder: (ctx) =>
+                        Container(
+                          child: GestureDetector(
+                              onTap: () => _showAttraction(context, attractions[8], _currentLocation.latitude, _currentLocation.longitude, attractions[8].mapLocation.latitude, attractions[8].mapLocation.longitude),
+                              child: Icon(Icons.location_on, color: Colors.brown, size: attractionIconSize)
+                          ),
+                        ),
+                  ),
             ]),
         ],),
     );
@@ -307,10 +318,9 @@ class TrailEnabledState extends MvpScreen<TrailEnabled, Trail> {
           builder: (BuildContext context) {
             return AlertDialog(
               title: new Text("VELKOMMEN I MÅL", style: TitleTextStyleDark,),
-              content: new Text("Du har gennemført kronborg ruten ${trail
-                  .name} som strækker sig på ${trail
-                  .lengthKM}km. \nDu besøgte ${viewModel
-                  .attractionsVisited} attraktioner som befandt sig nær denne interessante rute",
+              content: new Text("Du har gennemført kronborg ruten ${trail.name} som strækker sig over ${trail.lengthKM}km. "
+                  "\nDu besøgte ${viewModel.attractionsVisited} ud af 4 attraktioner, som befandt sig nær denne interessante rute. "
+                  "\n\nDel din aktivitet og/eller gå på opdagelser på nye ruter.",
                 style: CaptionTextStyle,),
               actions: <Widget>[
                 FlatButton(

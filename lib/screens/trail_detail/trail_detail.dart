@@ -28,24 +28,25 @@ class TrailDetail extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Padding(
-                    padding:
-                    EdgeInsets.symmetric(vertical: 20.0, horizontal: 4.0),
-                    child: TrailTile(trail: trail),
-                  ),
+//                  Padding(
+//                    padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 4.0),
+//                    child: TrailTile(trail: trail),
+//                  ),
                   ImageBanner(assetPath: trail.imagePath),
                 ]..addAll(textSections(trail))),
           ),
-          floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+          floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
           floatingActionButton: Padding(
-            padding: const EdgeInsets.only(bottom: 25.0),
+            padding: const EdgeInsets.only(bottom: 20.0, right: 20.0),
                   child: FloatingActionButton(
-                      child: const Icon(Icons.directions_run, color: BackgroundColor,),
+                      child: Icon(Icons.directions_run, color: BackgroundColor,),
                           backgroundColor: Colors.white,
                           tooltip: 'Start Rute',
                           onPressed: () {
                             _onStartTrailTap(context, trail.id);
-                          },),)
+                          },
+                  ),
+          )
     );
   }
 

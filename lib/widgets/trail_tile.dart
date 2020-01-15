@@ -17,7 +17,7 @@ class TrailTile extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: DefaultPaddingHorizontal),
       height: TrailTileHeight,
       child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(

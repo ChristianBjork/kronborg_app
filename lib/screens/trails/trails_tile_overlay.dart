@@ -14,7 +14,7 @@ class TrailTileOverlay extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
-            padding: EdgeInsets.symmetric(vertical: 1.0),
+            padding: EdgeInsets.symmetric(vertical: 0.0),
             decoration: BoxDecoration(color: Colors.black.withOpacity(0.5)),
             child: TrailTile(trail: trail, darkTheme: true),
           )]
