@@ -66,8 +66,8 @@ class TrailEnabledState extends MvpScreen<TrailEnabled, Trail> {
         ),
         body: FlutterMap(
           options: new MapOptions(
-            //center: new LatLng(56.0387192, 12.61621),
-            center: new LatLng(_currentLocation.latitude, _currentLocation.longitude),
+            center: new LatLng(56.0387192, 12.61621),
+            //center: new LatLng(_currentLocation.latitude, _currentLocation.longitude),
             zoom: 18.0),
             layers: [
               //Get map from MapBox API
